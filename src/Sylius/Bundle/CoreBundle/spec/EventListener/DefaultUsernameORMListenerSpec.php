@@ -211,4 +211,108 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 
         $this->onFlush($onFlushEventArgs);
     }
+
+    function it_skips_objects_other_than_customers(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        \stdClass $stdObject,
+        CustomerInterface $customer,
+        ShopUserInterface $user,
+        ClassMetadata $userMetadata
+    ): void {
+        $user->getUsername()->willReturn('customer+extra@email.com');
+        $user->getUsernameCanonical()->willReturn('user@email.com');
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
+
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([$stdObject, $customer]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
+
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldBeCalledOnce();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
+    function it_skips_customers_without_users_associated(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customerWithoutUser,
+        CustomerInterface $customerWithUser,
+        ShopUserInterface $user,
+        ClassMetadata $userMetadata
+    ): void {
+        $customerWithoutUser->getUser()->willReturn(null);
+
+        $user->getUsername()->willReturn('customer+extra@email.com');
+        $user->getUsernameCanonical()->willReturn('user@email.com');
+        $customerWithUser->getUser()->willReturn($user);
+        $customerWithUser->getEmail()->willReturn('customer+extra@email.com');
+        $customerWithUser->getEmailCanonical()->willReturn('customer@email.com');
+
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([$customerWithoutUser, $customerWithUser]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
+
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldBeCalledOnce();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
+    function it_skips_customers_with_same_emails(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customerWithSameEmail,
+        CustomerInterface $customerWithDifferentEmail,
+        ShopUserInterface $userWithSameEmail,
+        ShopUserInterface $userWithDifferentEmail,
+        ClassMetadata $userMetadata
+    ): void {
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customerWithSameEmail, $customerWithDifferentEmail]);
+
+        $userWithSameEmail->getUsername()->willReturn('customer+extra@email.com');
+        $userWithSameEmail->getUsernameCanonical()->willReturn('customer@email.com');
+        $customerWithSameEmail->getUser()->willReturn($userWithSameEmail);
+        $customerWithSameEmail->getEmail()->willReturn('customer+extra@email.com');
+        $customerWithSameEmail->getEmailCanonical()->willReturn('customer@email.com');
+
+        $userWithDifferentEmail->getUsername()->willReturn('customer+extra@email.com');
+        $userWithDifferentEmail->getUsernameCanonical()->willReturn('user@email.com');
+        $customerWithDifferentEmail->getUser()->willReturn($userWithDifferentEmail);
+        $customerWithDifferentEmail->getEmail()->willReturn('customer+extra@email.com');
+        $customerWithDifferentEmail->getEmailCanonical()->willReturn('customer@email.com');
+
+        $userWithSameEmail->setUsername(Argument::any())->shouldNotBeCalled();
+        $userWithSameEmail->setUsernameCanonical(Argument::any())->shouldNotBeCalled();
+
+        $userWithDifferentEmail->setUsername(Argument::any())->shouldBeCalled();
+        $userWithDifferentEmail->setUsernameCanonical(Argument::any())->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($userWithDifferentEmail->getWrappedObject()))->willReturn($userMetadata);
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldBeCalledOnce();
+
+        $this->onFlush($onFlushEventArgs);
+    }
 }

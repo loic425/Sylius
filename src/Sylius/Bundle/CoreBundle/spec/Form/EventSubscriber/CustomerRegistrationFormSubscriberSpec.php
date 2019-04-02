@@ -95,4 +95,23 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 
         $this->preSubmit($event);
     }
+
+    function it_does_not_set_user_if_email_is_empty(
+        FormEvent $event,
+        FormInterface $form,
+        CustomerInterface $customer,
+        RepositoryInterface $customerRepository,
+        CustomerInterface $existingCustomer,
+        ShopUserInterface $user
+    ): void {
+        $event->getForm()->willReturn($form);
+        $form->getData()->willReturn($customer);
+        $event->getData()->willReturn(['email' => '']);
+
+        $customerRepository->findOneBy(['email' => ''])->shouldNotBeCalled();
+        $existingCustomer->setUser($user)->shouldNotBeCalled();
+        $form->setData($existingCustomer)->shouldNotBeCalled();
+
+        $this->preSubmit($event);
+    }
 }
