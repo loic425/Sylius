@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ChannelBundle\Tests;
 
 use PHPUnit\Framework\Assert;
+use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -36,6 +37,24 @@ final class SyliusChannelBundleTest extends WebTestCase
 
         foreach ($services as $id) {
             Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function its_initializes_default_doctrine_repositories(): void
+    {
+        /** @var ContainerBuilder $container */
+        $container = self::createClient()->getContainer();
+
+        $repositories = [
+            'sylius.repository.channel' => ChannelRepository::class,
+        ];
+
+        foreach ($repositories as $id => $class) {
+            $service = $container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+            Assert::assertEquals(get_class($service), $class);
         }
     }
 }
