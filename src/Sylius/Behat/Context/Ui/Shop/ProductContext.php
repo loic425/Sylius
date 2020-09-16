@@ -23,6 +23,7 @@ use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewInde
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -203,11 +204,19 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I browse products from (taxon "([^"]+)")$/
+     * @When I browse products from taxon :taxon
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
         $this->indexPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @When I try to browse products from taxon :taxon with a trailing slash in the path
+     */
+    public function iTryToBrowseProductsFromTaxonWithATrailingSlashInThePath(TaxonInterface $taxon)
+    {
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug().'/']);
     }
 
     /**
@@ -549,6 +558,14 @@ final class ProductContext implements Context
     public function iShouldBeInformedThatTheProductDoesNotExist()
     {
         Assert::eq($this->errorPage->getTitle(), 'The "product" has not been found');
+    }
+
+    /**
+     * @Then I should be redirected on the product list from taxon :taxon
+     */
+    public function iShouldBeRedirectedOnTheProductListFromTaxon(TaxonInterface $taxon)
+    {
+        $this->indexPage->verify(['slug' => $taxon->getSlug()]);
     }
 
     /**
