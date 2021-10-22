@@ -61,7 +61,7 @@
         "sylius-labs/polyfill-symfony-security": "^1.0",
         "sylius/fixtures-bundle": "^1.6.1",
         "sylius/grid": "^1.8",
-        "sylius/grid-bundle": "^1.8",
+        "sylius/grid-bundle": "dev-master",
         "sylius/mailer": "^1.5",
         "sylius/mailer-bundle": "^1.5",
         "sylius/registry": "^1.5",
@@ -279,6 +279,12 @@
             "src/Kernel.php"
         ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:loic425/SyliusGridBundle.git"
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "@auto-scripts"
