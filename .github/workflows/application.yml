@@ -47,6 +47,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}                    
 
             -
                 name: Restrict Symfony version
@@ -143,6 +145,8 @@ jobs:
                     extensions: intl, gd, opcache, pgsql, pdo_pgsql, :xdebug
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -224,6 +228,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -366,6 +372,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -
                 name: Restrict Symfony version
@@ -502,6 +510,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -
                 name: Restrict Symfony version
