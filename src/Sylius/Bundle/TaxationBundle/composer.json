@@ -66,6 +66,7 @@
         ]
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

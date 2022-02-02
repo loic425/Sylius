@@ -19,6 +19,9 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" }
+    ],
     "require": {
         "php": "^8.0",
         "ext-exif": "*",
