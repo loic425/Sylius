@@ -38,7 +38,7 @@
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-81",
+        "phpspec/phpspec": "dev-php81",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.4"
     },

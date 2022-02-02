@@ -31,7 +31,7 @@
         "webmozart/assert": "^1.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-81"
+        "phpspec/phpspec": "dev-php81"
     },
     "extra": {
         "branch-alias": {

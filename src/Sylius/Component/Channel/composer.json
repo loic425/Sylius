@@ -34,7 +34,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-81"
+        "phpspec/phpspec": "dev-php81"
     },
     "extra": {
         "branch-alias": {
