@@ -38,7 +38,7 @@
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1",
+        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.4"
     },
@@ -53,6 +53,7 @@
         }
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/Sylius/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

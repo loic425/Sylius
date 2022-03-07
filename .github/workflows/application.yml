@@ -31,7 +31,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
 
         steps:
@@ -47,6 +47,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -
                 name: Restrict Symfony version
@@ -98,7 +100,7 @@ jobs:
                 name: Validate Container
                 run: bin/console lint:container
                 if: always() && steps.end-of-setup.outcome == 'success'
-                
+
             -
                 name: Validate Yaml files
                 run: bin/console lint:yaml src
@@ -124,7 +126,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
 
         steps:
             -
@@ -146,7 +148,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ "8.0" ]
+                php: ["8.0", "8.1"]
                 symfony: [ "^4.4", "^5.2" ]
 
         steps:
@@ -160,6 +162,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -190,7 +194,7 @@ jobs:
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
         strategy:
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
                 postgres: ["13.3"]
 
@@ -218,6 +222,9 @@ jobs:
                     extensions: intl, gd, opcache, pgsql, pdo_pgsql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -271,7 +278,7 @@ jobs:
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }})"
         strategy:
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
                 mariadb: ["10.4.10"]
 
@@ -299,6 +306,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -397,7 +406,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
@@ -430,6 +439,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -
                 name: Restrict Symfony version
@@ -524,7 +535,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
@@ -557,6 +568,8 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -
                 name: Restrict Symfony version
