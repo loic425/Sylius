@@ -48,7 +48,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpspec/phpspec": "dev-php81",
+        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.4",
         "symfony/form": "^4.4 || ^5.4",
@@ -65,7 +65,7 @@
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" },
+        { "type": "vcs", "url": "https://github.com/Sylius/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

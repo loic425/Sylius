@@ -55,7 +55,7 @@
         "hwi/oauth-bundle": "^1.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "php-http/guzzle6-adapter": "^2.0",
-        "phpspec/phpspec": "dev-php81",
+        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.4",
         "symfony/security-bundle": "^4.4 || ^5.4",
@@ -86,7 +86,7 @@
         ]
     },
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" },
+        { "type": "vcs", "url": "https://github.com/Sylius/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

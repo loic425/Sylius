@@ -36,7 +36,7 @@
         "sylius/resource": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-php81"
+        "phpspec/phpspec": "dev-main"
     },
     "extra": {
         "branch-alias": {
@@ -54,7 +54,7 @@
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" },
+        { "type": "vcs", "url": "https://github.com/Sylius/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

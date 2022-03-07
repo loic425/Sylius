@@ -36,7 +36,7 @@
         "webmozart/assert": "^1.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-php81"
+        "phpspec/phpspec": "dev-main"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"
@@ -57,7 +57,7 @@
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/loic425/phpspec.git" },
+        { "type": "vcs", "url": "https://github.com/Sylius/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"
