@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,6 +33,9 @@ final class DashboardController
         private ?SalesDataProviderInterface $salesDataProvider = null,
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null
     ) {
+        if ($salesDataProvider instanceof SalesDataProviderInterface) {
+            @trigger_error('Passing a sales data provider is deprecated since 1.12 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+        }
     }
 
     public function indexAction(Request $request): Response
