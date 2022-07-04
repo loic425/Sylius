@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -29,7 +28,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
     public function let(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ServiceRegistryInterface $shippingCalculators
+        ServiceRegistryInterface $shippingCalculators,
     ): void {
         $this->beConstructedWith($orderRepository, $shipmentRepository, $shippingCalculators);
     }
@@ -81,7 +80,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         OrderInterface $cart,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);
@@ -117,7 +116,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         NormalizerInterface $normalizer,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shipmentRepository->find('999')->willReturn($shipment);
 
@@ -126,7 +125,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize($shippingMethod, null, [
                 'sylius_shipping_method_normalizer_already_called' => true,
-                'subresource_identifiers' => [ 'id' => '999'],
+                'subresource_identifiers' => ['id' => '999'],
             ])
             ->willReturn([])
         ;
@@ -147,7 +146,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_the_normalizer_has_been_already_called(
         NormalizerInterface $normalizer,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $this->setNormalizer($normalizer);
 

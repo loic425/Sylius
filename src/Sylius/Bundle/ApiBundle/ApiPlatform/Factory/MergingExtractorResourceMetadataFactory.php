@@ -44,7 +44,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
         ExtractorInterface $extractor,
         ResourceMetadataFactoryInterface $decorated,
         ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
-        array $defaults = []
+        array $defaults = [],
     ) {
         $this->extractor = $extractor;
         $this->decorated = $decorated;
@@ -53,7 +53,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function create(string $resourceClass): ResourceMetadata
     {

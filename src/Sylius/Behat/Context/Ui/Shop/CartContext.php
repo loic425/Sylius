@@ -38,7 +38,7 @@ final class CartContext implements Context
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
@@ -374,7 +374,7 @@ final class CartContext implements Context
     public function iAddThisProductWithToTheCart(
         ProductInterface $product,
         ProductOptionInterface $productOption,
-        string $productOptionValue
+        string $productOptionValue,
     ): void {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 

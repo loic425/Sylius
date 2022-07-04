@@ -36,7 +36,7 @@ final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQuery
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, ProductInterface::class, true)) {
             return;
@@ -63,7 +63,7 @@ final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQuery
                 sprintf('%s.translations', $rootAlias),
                 'translation',
                 'WITH',
-                sprintf('translation.locale = :%s', $localeCodeParameterName)
+                sprintf('translation.locale = :%s', $localeCodeParameterName),
             )
             ->andWhere(sprintf(':%s MEMBER OF %s.channels', $channelsParameterName, $rootAlias))
             ->setParameter($channelsParameterName, $channel)

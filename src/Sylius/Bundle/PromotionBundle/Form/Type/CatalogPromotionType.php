@@ -32,7 +32,7 @@ final class CatalogPromotionType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        string $catalogPromotionTranslationType
+        string $catalogPromotionTranslationType,
     ) {
         parent::__construct($dataClass, $validationGroups);
 
@@ -94,7 +94,7 @@ final class CatalogPromotionType extends AbstractResourceType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
             $data = $event->getData();
 
             if (isset($data['startDate']) && $data['startDate']['date'] !== '' && $data['startDate']['time'] === '') {

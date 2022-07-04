@@ -92,13 +92,13 @@ final class ProductContext implements Context
         ProductVariantResolverInterface $defaultVariantResolver,
         ImageUploaderInterface $imageUploader,
         SlugGeneratorInterface $slugGenerator,
-        $minkParameters
+        $minkParameters,
     ) {
         if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
             throw new \InvalidArgumentException(sprintf(
                 '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
                 self::class,
-                \ArrayAccess::class
+                \ArrayAccess::class,
             ));
         }
 
@@ -140,7 +140,7 @@ final class ProductContext implements Context
     public function thisProductHasOriginallyPriceInChannel(
         ProductInterface $product,
         int $originalPrice,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -309,14 +309,14 @@ final class ProductContext implements Context
         ProductInterface $product,
         $productVariantName,
         $price,
-        ChannelInterface $channel = null
+        ChannelInterface $channel = null,
     ) {
         $this->createProductVariant(
             $product,
             $productVariantName,
             $price,
             StringInflector::nameToUppercaseCode($productVariantName),
-            $channel ?? $this->sharedStorage->get('channel')
+            $channel ?? $this->sharedStorage->get('channel'),
         );
     }
 
@@ -326,7 +326,7 @@ final class ProductContext implements Context
     public function variantPricedAtInChannel(
         ProductVariantInterface $productVariant,
         int $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
 
@@ -339,7 +339,7 @@ final class ProductContext implements Context
     public function variantIsOriginalPricedAtInChannel(
         ProductVariantInterface $productVariant,
         int $originalPrice,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricingForChannel($channel);
@@ -352,7 +352,7 @@ final class ProductContext implements Context
     public function variantHasMinimumPriceInChannel(
         ProductVariantInterface $productVariant,
         int $minimumPrice,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricingForChannel($channel);
@@ -374,7 +374,7 @@ final class ProductContext implements Context
                 $name,
                 0,
                 StringInflector::nameToUppercaseCode($name),
-                $channel
+                $channel,
             );
         }
     }
@@ -409,7 +409,7 @@ final class ProductContext implements Context
     public function theProductHasVariantWhichDoesNotRequireShipping(
         ProductInterface $product,
         $productVariantName,
-        $price
+        $price,
     ) {
         $this->createProductVariant(
             $product,
@@ -418,7 +418,7 @@ final class ProductContext implements Context
             StringInflector::nameToUppercaseCode($productVariantName),
             $this->sharedStorage->get('channel'),
             null,
-            false
+            false,
         );
     }
 
@@ -430,7 +430,7 @@ final class ProductContext implements Context
     public function theProductHasVariantAtPosition(
         ProductInterface $product,
         $productVariantName,
-        $position = null
+        $position = null,
     ) {
         $this->createProductVariant(
             $product,
@@ -438,7 +438,7 @@ final class ProductContext implements Context
             0,
             StringInflector::nameToUppercaseCode($productVariantName),
             $this->sharedStorage->get('channel'),
-            $position
+            $position,
         );
     }
 
@@ -449,7 +449,7 @@ final class ProductContext implements Context
     {
         $productVariant->addChannelPricing($this->createChannelPricingForChannel(
             $this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)),
-            $channel
+            $channel,
         ));
 
         $this->objectManager->flush();
@@ -465,7 +465,7 @@ final class ProductContext implements Context
             $firstName,
             100,
             StringInflector::nameToUppercaseCode($firstName),
-            $this->sharedStorage->get('channel')
+            $this->sharedStorage->get('channel'),
         );
 
         $names = [$firstName => $firstLocale, $secondName => $secondLocale];
@@ -483,7 +483,7 @@ final class ProductContext implements Context
         ProductInterface $product,
         $productVariantName,
         $price,
-        $code
+        $code,
     ) {
         $this->createProductVariant($product, $productVariantName, $price, $code, $this->sharedStorage->get('channel'));
     }
@@ -541,7 +541,7 @@ final class ProductContext implements Context
             $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
             $variant->addChannelPricing($this->createChannelPricingForChannel(
                 $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])),
-                $channel
+                $channel,
             ));
 
             $variant->setProduct($product);
@@ -556,7 +556,7 @@ final class ProductContext implements Context
      */
     public function productVariantBelongsToTaxCategory(
         ProductVariantInterface $productVariant,
-        TaxCategoryInterface $taxCategory
+        TaxCategoryInterface $taxCategory,
     ) {
         $productVariant->setTaxCategory($taxCategory);
 
@@ -776,7 +776,7 @@ final class ProductContext implements Context
         ProductInterface $product,
         string $imagePath,
         string $imageType,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->createProductImage($product, $imagePath, $imageType, $variant);
     }
@@ -912,7 +912,7 @@ final class ProductContext implements Context
         ProductInterface $product,
         ProductOption $productOption,
         string $optionValue,
-        string $optionCode
+        string $optionCode,
     ): void {
         /** @var ProductOptionValueInterface $productOptionValue */
         $productOptionValue = $this->productOptionValueFactory->createNew();
@@ -1016,7 +1016,7 @@ final class ProductContext implements Context
     public function allTheProductVariantsWithTheColorAreDisabled(
         ProductInterface $product,
         string $optionValue,
-        string $optionName
+        string $optionName,
     ): void {
         foreach ($product->getVariants() as $variant) {
             foreach ($variant->getOptionValues() as $variantOptionValue) {
@@ -1169,7 +1169,7 @@ final class ProductContext implements Context
         ChannelInterface $channel = null,
         $position = null,
         $shippingRequired = true,
-        int $currentStock = 0
+        int $currentStock = 0,
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -1265,7 +1265,7 @@ final class ProductContext implements Context
         ProductInterface $product,
         string $imagePath,
         string $imageType,
-        ?ProductVariantInterface $variant = null
+        ?ProductVariantInterface $variant = null,
     ): void {
         $filesPath = $this->getParameter('files_path');
 

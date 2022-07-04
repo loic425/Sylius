@@ -52,7 +52,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
         ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;

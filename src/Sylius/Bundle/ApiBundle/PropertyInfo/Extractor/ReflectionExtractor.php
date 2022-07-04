@@ -110,7 +110,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getProperties(string $class, array $context = []): ?array
     {
@@ -148,7 +148,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTypes(string $class, string $property, array $context = []): ?array
     {
@@ -187,7 +187,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTypesFromConstructor(string $class, string $property): ?array
     {
@@ -225,7 +225,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isReadable(string $class, string $property, array $context = []): ?bool
     {
@@ -237,7 +237,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isWritable(string $class, string $property, array $context = []): ?bool
     {
@@ -251,7 +251,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isInitializable(string $class, string $property, array $context = []): ?bool
     {
@@ -279,7 +279,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getReadInfo(string $class, string $property, array $context = []): ?PropertyReadInfo
     {
@@ -338,7 +338,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getWriteInfo(string $class, string $property, array $context = []): ?PropertyWriteInfo
     {
@@ -449,7 +449,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
                 'the new value must be an array or an instance of \Traversable',
                 $property,
                 $reflClass->getName(),
-                implode('()", "', [$adderAccessName, $removerAccessName])
+                implode('()", "', [$adderAccessName, $removerAccessName]),
             );
         }
 

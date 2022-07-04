@@ -18,7 +18,6 @@ use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInter
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
@@ -36,7 +35,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_catalog_promotion_scope_does_not_have_variants_key_configured(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
@@ -47,7 +46,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_catalog_promotion_scope_has_empty_variants_configured(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
@@ -59,7 +58,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_variants_configured(
         ProductVariantRepositoryInterface $variantRepository,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $variantRepository->findOneBy(['code' => 'not_existing_variant'])->willReturn(null);
 
@@ -74,7 +73,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $variantRepository,
         ExecutionContextInterface $executionContext,
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
     ): void {
         $variantRepository->findOneBy(['code' => 'first_variant'])->willReturn($firstVariant);
         $variantRepository->findOneBy(['code' => 'second_variant'])->willReturn($secondVariant);

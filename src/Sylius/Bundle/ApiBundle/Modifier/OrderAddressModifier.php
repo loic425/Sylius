@@ -28,7 +28,7 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
 
     public function __construct(
         StateMachineFactoryInterface $stateMachineFactory,
-        AddressMapperInterface $addressMapper
+        AddressMapperInterface $addressMapper,
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
         $this->addressMapper = $addressMapper;
@@ -40,7 +40,7 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
-            sprintf('Order with %s token cannot be addressed.', $order->getTokenValue())
+            sprintf('Order with %s token cannot be addressed.', $order->getTokenValue()),
         );
 
         /** @var AddressInterface|null $oldBillingAddress */

@@ -27,7 +27,7 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        FactoryInterface $stateMachine,
     ): void {
         $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
@@ -36,7 +36,7 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
@@ -50,7 +50,7 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();

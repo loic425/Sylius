@@ -24,7 +24,7 @@ final class CatalogPromotionCreatedListener
     public function __construct(
         private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         private RepositoryInterface $catalogPromotionRepository,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 

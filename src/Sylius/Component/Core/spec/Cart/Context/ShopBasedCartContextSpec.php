@@ -44,7 +44,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $cartContext->getCart()->willReturn($cart);
 
@@ -71,7 +71,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $cartContext->getCart()->willReturn($cart);
 
@@ -97,7 +97,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_throws_a_cart_not_found_exception_if_channel_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willThrow(ChannelNotFoundException::class);
@@ -113,7 +113,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
@@ -133,7 +133,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 
@@ -161,7 +161,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         OrderInterface $secondCart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $cartContext->getCart()->shouldBeCalledTimes(2)->willReturn($firstCart, $secondCart);
 

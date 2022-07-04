@@ -35,7 +35,7 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_catalog_promotion_scope_does_not_have_taxons_key_configured(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
@@ -47,7 +47,7 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_taxons_configured(
         TaxonRepositoryInterface $taxonRepository,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $taxonRepository->findOneBy(['code' => 'not_existing_taxon'])->willReturn(null);
 
@@ -61,7 +61,7 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_scope_is_valid(
         TaxonRepositoryInterface $taxonRepository,
         ExecutionContextInterface $executionContext,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $taxonRepository->findOneBy(['code' => 'taxon'])->willReturn($taxon);
 

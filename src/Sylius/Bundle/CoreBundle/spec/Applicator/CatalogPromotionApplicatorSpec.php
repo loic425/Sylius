@@ -28,7 +28,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
     function let(
         ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
-        ProductVariantForCatalogPromotionEligibilityInterface $checker
+        ProductVariantForCatalogPromotionEligibilityInterface $checker,
     ): void {
         $this->beConstructedWith($actionBasedDiscountApplicator, $checker);
     }
@@ -47,7 +47,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ChannelInterface $secondChannel,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,
-        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
     ): void {
         $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(true);
 

@@ -30,7 +30,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        Interval $interval
+        Interval $interval,
     ): SalesSummaryInterface {
         $queryBuilder = $this->orderRepository->createQueryBuilder('o')
             ->select('SUM(o.total) AS total')
@@ -67,7 +67,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'year = :startYear AND year = :endYear AND month >= :startMonth AND month <= :endMonth',
                         'year = :startYear AND year != :endYear AND month >= :startMonth',
                         'year = :endYear AND year != :startYear AND month <= :endMonth',
-                        'year > :startYear AND year < :endYear'
+                        'year > :startYear AND year < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
@@ -92,7 +92,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'year = :startYear AND year = :endYear AND week >= :startWeek AND week <= :endWeek',
                         'year = :startYear AND year != :endYear AND week >= :startWeek',
                         'year = :endYear AND year != :startYear AND week <= :endWeek',
-                        'year > :startYear AND year < :endYear'
+                        'year > :startYear AND year < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startWeek', (ltrim($startDate->format('W'), '0') ?: '0'))
@@ -124,7 +124,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'year = :startYear AND year != :endYear AND month > :startMonth',
                         'year = :endYear AND year != :startYear AND month = :endMonth AND day <= :endDay',
                         'year = :endYear AND year != :startYear AND month < :endMonth',
-                        'year > :startYear AND year < :endYear'
+                        'year > :startYear AND year < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
@@ -162,7 +162,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
             static function (int $total): string {
                 return number_format(abs($total / 100), 2, '.', '');
             },
-            $salesData
+            $salesData,
         );
 
         return new SalesSummary($salesData);

@@ -29,7 +29,7 @@ final class AppliedCouponEligibilityChecker implements AppliedCouponEligibilityC
 
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionChecker,
-        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
     ) {
         $this->promotionChecker = $promotionChecker;
         $this->promotionCouponChecker = $promotionCouponChecker;

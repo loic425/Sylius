@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -48,7 +48,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         CustomerProviderInterface $customerProvider,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $tokenGenerator,
-        MessageBusInterface $commandBus
+        MessageBusInterface $commandBus,
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
@@ -83,7 +83,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->commandBus->dispatch(new SendAccountRegistrationEmail(
             $command->email,
             $command->localeCode,
-            $command->channelCode
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         if (!$channel->isAccountVerificationRequired()) {
@@ -98,7 +98,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->commandBus->dispatch(new SendAccountVerificationEmail(
             $command->email,
             $command->localeCode,
-            $command->channelCode
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         return $user;

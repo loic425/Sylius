@@ -29,7 +29,9 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
     private const ALREADY_CALLED = 'sylius_product_image_normalizer_already_called';
 
     private CacheManager $cacheManager;
+
     private RequestStack $requestStack;
+
     private string $prefix;
 
     public function __construct(CacheManager $cacheManager, RequestStack $requestStack, string $prefix)
@@ -81,7 +83,8 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
             /** @var string $filter */
             $filter = $request->query->get('filter');
 
-            $data['path'] = $this->cacheManager->getBrowserPath(parse_url($data['path'], PHP_URL_PATH), $filter);
+            $data['path'] = $this->cacheManager->getBrowserPath(parse_url($data['path'], \PHP_URL_PATH), $filter);
+
             return $data;
         }
 

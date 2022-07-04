@@ -37,7 +37,7 @@ final class CountryCollectionExtension implements ContextAwareQueryCollectionExt
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, CountryInterface::class, true)) {
             return;
@@ -56,7 +56,7 @@ final class CountryCollectionExtension implements ContextAwareQueryCollectionExt
         if ($channel->getCountries()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $countriesParameterName))
+                ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $countriesParameterName))
                 ->setParameter($countriesParameterName, $channel->getCountries())
             ;
         }

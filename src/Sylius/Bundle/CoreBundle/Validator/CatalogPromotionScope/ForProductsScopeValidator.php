@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope;
 
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;

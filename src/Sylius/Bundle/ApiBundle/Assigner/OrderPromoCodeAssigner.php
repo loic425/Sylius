@@ -27,7 +27,7 @@ final class OrderPromoCodeAssigner implements OrderPromoCodeAssignerInterface
 
     public function __construct(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ) {
         $this->promotionCouponRepository = $promotionCouponRepository;
         $this->orderProcessor = $orderProcessor;

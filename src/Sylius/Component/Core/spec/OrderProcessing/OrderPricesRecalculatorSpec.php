@@ -44,7 +44,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
 

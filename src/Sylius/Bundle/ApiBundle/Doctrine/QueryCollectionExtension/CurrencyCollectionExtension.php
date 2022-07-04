@@ -37,7 +37,7 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, CurrencyInterface::class, true)) {
             return;
@@ -56,8 +56,9 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         if ($channel->getCurrencies()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $currenciesParameterName))
-                ->setParameter($currenciesParameterName, $channel->getCurrencies());
+                ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $currenciesParameterName))
+                ->setParameter($currenciesParameterName, $channel->getCurrencies())
+            ;
         }
     }
 }

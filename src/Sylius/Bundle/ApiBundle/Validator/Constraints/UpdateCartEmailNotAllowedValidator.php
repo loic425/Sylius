@@ -26,6 +26,7 @@ use Webmozart\Assert\Assert;
 final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
 {
     private OrderRepositoryInterface $orderRepository;
+
     private UserContextInterface $userContext;
 
     public function __construct(OrderRepositoryInterface $orderRepository, UserContextInterface $userContext)
@@ -49,7 +50,7 @@ final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
 
         $user = $this->userContext->getUser();
 
-        if($user !== null && $value->getEmail()) {
+        if ($user !== null && $value->getEmail()) {
             $this->context->addViolation($constraint->message);
         }
     }

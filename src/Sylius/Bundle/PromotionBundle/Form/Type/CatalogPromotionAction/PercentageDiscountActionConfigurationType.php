@@ -7,7 +7,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PercentageDiscountActionConfigurationType extends AbstractType
 {
