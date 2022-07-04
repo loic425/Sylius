@@ -27,7 +27,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -50,7 +49,7 @@ final class ProductContext implements Context
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
-        ChannelContextSetterInterface $channelContextSetter
+        ChannelContextSetterInterface $channelContextSetter,
     ) {
         $this->client = $client;
         $this->productVariantClient = $productVariantClient;
@@ -82,7 +81,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+        $this->client->showByIri('/api/v2/shop/products-by-slug/' . $product->getSlug());
 
         $this->sharedStorage->set('product', $product);
     }
@@ -94,7 +93,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/' . $product->getCode());
     }
 
     /**
@@ -160,7 +159,7 @@ final class ProductContext implements Context
     {
         Assert::true($this->hasProductWithName(
             $this->responseChecker->getCollection($this->client->getLastResponse()),
-            $name
+            $name,
         ));
     }
 
@@ -178,7 +177,7 @@ final class ProductContext implements Context
     public function iShouldSeeAProductWithName(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
         );
     }
 
@@ -202,7 +201,7 @@ final class ProductContext implements Context
     {
         Assert::false($this->hasProductWithName(
             $this->responseChecker->getCollection($this->client->getLastResponse()),
-            $name
+            $name,
         ));
     }
 
@@ -262,9 +261,9 @@ final class ProductContext implements Context
             $this->hasProductWithPrice(
                 $this->responseChecker->getCollection($this->client->getLastResponse()),
                 $price,
-                $product->getCode()
+                $product->getCode(),
             ),
-            sprintf('There is no product with %s code and %s price', $product->getCode(), $price)
+            sprintf('There is no product with %s code and %s price', $product->getCode(), $price),
         );
     }
 
@@ -277,9 +276,9 @@ final class ProductContext implements Context
             $this->hasProductWithNameAndShortDescription(
                 $this->responseChecker->getCollection($this->client->getLastResponse()),
                 $product->getName(),
-                $shortDescription
+                $shortDescription,
             ),
-            sprintf('There is no product with %s name and %s short description', $product->getName(), $shortDescription)
+            sprintf('There is no product with %s name and %s short description', $product->getName(), $shortDescription),
         );
     }
 
@@ -331,7 +330,7 @@ final class ProductContext implements Context
         Assert::same(
             count($this->responseChecker->getCollection($this->client->getLastResponse())),
             $count,
-            'Number of products from response is different then expected'
+            'Number of products from response is different then expected',
         );
     }
 
@@ -402,7 +401,7 @@ final class ProductContext implements Context
     public function theProductPriceShouldBe(int $price): void
     {
         $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant')
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant'),
         );
 
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
@@ -415,7 +414,7 @@ final class ProductContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'description'),
-            $description
+            $description,
         );
     }
 
@@ -426,7 +425,7 @@ final class ProductContext implements Context
         int $price,
         string $priceType,
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->sharedStorage->set('token', null);
         $this->sharedStorage->set('hostname', $channel->getHostname());
@@ -436,7 +435,7 @@ final class ProductContext implements Context
             [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
             $price,
             null,
-            StringInflector::nameToCamelCase($priceType)
+            StringInflector::nameToCamelCase($priceType),
         ));
     }
 
@@ -444,7 +443,7 @@ final class ProductContext implements Context
         array $products,
         int $price,
         ?string $productCode = null,
-        string $priceType = 'price'
+        string $priceType = 'price',
     ): bool {
         foreach ($products as $product) {
             if ($productCode !== null && $product['code'] !== $productCode) {

@@ -37,7 +37,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, TaxonInterface::class, true)) {
             return;
@@ -58,11 +58,12 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         $queryBuilder
             ->addSelect('child')
             ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')
-            ->leftJoin(sprintf('%s.children',$rootAlias), 'child')
-            ->andWhere(sprintf('%s.enabled = :%s',$rootAlias, $enabledParameterName))
-            ->andWhere(sprintf('parent.code = :%s',$parentCodeParameterName))
+            ->leftJoin(sprintf('%s.children', $rootAlias), 'child')
+            ->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName))
+            ->andWhere(sprintf('parent.code = :%s', $parentCodeParameterName))
             ->addOrderBy(sprintf('%s.position', $rootAlias))
             ->setParameter($parentCodeParameterName, ($channelMenuTaxon !== null) ? $channelMenuTaxon->getCode() : 'category')
-            ->setParameter($enabledParameterName, true);
+            ->setParameter($enabledParameterName, true)
+        ;
     }
 }

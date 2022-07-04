@@ -30,7 +30,7 @@ final class ProductVariantUpdatedListener
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ) {
         $this->productVariantRepository = $productVariantRepository;
         $this->productVariantCatalogPromotionsProcessor = $productVariantCatalogPromotionsProcessor;

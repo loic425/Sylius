@@ -23,7 +23,7 @@ final class EligibleCatalogPromotionsProvider implements EligibleCatalogPromotio
 
     public function __construct(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        iterable $defaultCriteria =  []
+        iterable $defaultCriteria = [],
     ) {
         $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->defaultCriteria = $defaultCriteria;

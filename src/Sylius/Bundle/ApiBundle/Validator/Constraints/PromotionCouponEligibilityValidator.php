@@ -35,7 +35,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     public function __construct(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderRepositoryInterface $orderRepository,
-        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
     ) {
         $this->promotionCouponRepository = $promotionCouponRepository;
         $this->orderRepository = $orderRepository;

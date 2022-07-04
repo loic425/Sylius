@@ -31,7 +31,7 @@ final class PercentageDiscountActionValidator implements ActionValidatorInterfac
             return;
         }
 
-        if (!is_float($configuration['amount']) && !is_integer($configuration['amount'])) {
+        if (!is_float($configuration['amount']) && !is_int($configuration['amount'])) {
             $context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
 
             return;

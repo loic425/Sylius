@@ -35,7 +35,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;

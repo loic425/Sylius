@@ -15,15 +15,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
@@ -36,7 +31,7 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $variant->getChannelPricings()->willReturn(new ArrayCollection([
             $firstChannelPricing->getWrappedObject(),

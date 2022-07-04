@@ -29,7 +29,7 @@ final class CatalogPromotionUpdatedListener
     public function __construct(
         AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ) {
         $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;

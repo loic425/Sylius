@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\UpdateCartEmailNotAllowed;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -84,7 +83,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         UserInterface $user,
         ExecutionContextInterface $executionContext,
-        UserContextInterface $userContext
+        UserContextInterface $userContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -103,7 +102,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
-        UserContextInterface $userContext
+        UserContextInterface $userContext,
     ): void {
         $this->initialize($executionContext);
 

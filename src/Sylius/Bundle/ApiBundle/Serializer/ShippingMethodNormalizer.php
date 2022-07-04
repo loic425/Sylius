@@ -43,7 +43,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ServiceRegistryInterface $shippingCalculators
+        ServiceRegistryInterface $shippingCalculators,
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
@@ -59,14 +59,14 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
-        $shipmentId = isset($subresourceIdentifiers['shipments']) ? $subresourceIdentifiers['shipments'] : $subresourceIdentifiers['id'];
+        $shipmentId = $subresourceIdentifiers['shipments'] ?? $subresourceIdentifiers['id'];
 
         /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentRepository->find($shipmentId);
 
         Assert::notNull($shipment);
 
-        if(isset($subresourceIdentifiers['tokenValue'])) {
+        if (isset($subresourceIdentifiers['tokenValue'])) {
             /** @var OrderInterface|null $cart */
             $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
             Assert::notNull($cart);

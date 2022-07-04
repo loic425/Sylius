@@ -30,7 +30,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_action_has_invalid_discount(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn([]);
 
@@ -44,7 +44,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_action_has_discount_in_wrong_range(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn(['amount' => 2]);
 
@@ -58,7 +58,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_action_has_wrong_type_on_amount(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn(['amount' => 'text']);
 
@@ -71,7 +71,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
 
     function it_does_nothing_if_catalog_promotion_action_is_valid(
         ExecutionContextInterface $executionContext,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn(['amount' => 0.2]);
 

@@ -32,7 +32,7 @@ final class ChannelPricingType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        ?RepositoryInterface $channelPricingRepository = null
+        ?RepositoryInterface $channelPricingRepository = null,
     ) {
         parent::__construct($dataClass, $validationGroups);
 
@@ -96,7 +96,7 @@ final class ChannelPricingType extends AbstractResourceType
             ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
 
             ->setDefaults([
-                'label' => fn(Options $options): string => $options['channel']->getName(),
+                'label' => fn (Options $options): string => $options['channel']->getName(),
             ])
         ;
     }

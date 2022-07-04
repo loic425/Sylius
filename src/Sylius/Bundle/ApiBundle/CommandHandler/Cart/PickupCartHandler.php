@@ -49,7 +49,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ) {
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
@@ -121,7 +121,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         if (!$this->hasLocaleWithLocaleCode($channel, $localeCode)) {
             throw new \InvalidArgumentException(sprintf(
                 'Cannot pick up cart, locale code "%s" does not exist.',
-                $localeCode
+                $localeCode,
             ));
         }
 

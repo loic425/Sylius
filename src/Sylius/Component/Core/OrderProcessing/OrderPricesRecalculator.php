@@ -43,7 +43,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
 
             $item->setUnitPrice($this->productVariantPriceCalculator->calculate(
                 $item->getVariant(),
-                ['channel' => $channel]
+                ['channel' => $channel],
             ));
         }
     }

@@ -29,7 +29,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
 {
     function let(
         ChannelContextInterface $channelContext,
-        SectionProviderInterface $sectionProvider
+        SectionProviderInterface $sectionProvider,
     ): void {
         $this->beConstructedWith($channelContext, $sectionProvider);
     }
@@ -43,7 +43,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
     function it_supports_normalization_if_section_is_not_admin_get(
         OrderItemInterface $orderItem,
         SectionProviderInterface $sectionProvider,
-        ShopApiSection $shopApiSection
+        ShopApiSection $shopApiSection,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $this->supportsNormalization($orderItem)->shouldReturn(true);
@@ -52,7 +52,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
     function it_does_not_support_if_section_is_admin_get(
         OrderItemInterface $orderItem,
         SectionProviderInterface $sectionProvider,
-        AdminApiSection $adminApiSection
+        AdminApiSection $adminApiSection,
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
         $this->supportsNormalization($orderItem)->shouldReturn(false);
@@ -72,7 +72,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ChannelInterface $channel,
         ProductVariantInterface $variant,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -92,7 +92,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(
         NormalizerInterface $normalizer,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $this->setNormalizer($normalizer);
 

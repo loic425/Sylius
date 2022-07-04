@@ -34,9 +34,8 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
-    ): void
-    {
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, CurrencyInterface::class, 'get', []])
@@ -48,7 +47,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -66,7 +65,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -75,7 +74,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        CurrencyInterface $currency
+        CurrencyInterface $currency,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -99,7 +98,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 }

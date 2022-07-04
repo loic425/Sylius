@@ -34,7 +34,7 @@ final class CatalogPromotionEndedListener
         AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        FactoryInterface $stateMachine,
     ) {
         $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;

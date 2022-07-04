@@ -28,7 +28,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(
         PromotionEligibilityCheckerInterface $promotionChecker,
-        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
     ): void {
         $this->beConstructedWith($promotionChecker, $promotionCouponChecker);
     }
@@ -43,7 +43,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
         PromotionCouponInterface $promotionCoupon,
         PromotionInterface $promotion,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $promotionCoupon->getPromotion()->shouldNotBeCalled();
         $promotion->getChannels()->shouldNotBeCalled();
@@ -61,13 +61,13 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
-        ChannelInterface $thirdChannel
+        ChannelInterface $thirdChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $secondChannel->getWrappedObject(),
-            $thirdChannel->getWrappedObject()
+            $thirdChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -84,13 +84,13 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -107,13 +107,13 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -130,13 +130,13 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 

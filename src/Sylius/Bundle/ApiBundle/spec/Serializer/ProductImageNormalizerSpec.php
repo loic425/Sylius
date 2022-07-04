@@ -30,7 +30,11 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         $this->beConstructedWith(
             $cacheManager,
             $requestStack,
-            'prefix', '/prefix', '/prefix/', 'prefix/');
+            'prefix',
+            '/prefix',
+            '/prefix/',
+            'prefix/',
+        );
     }
 
     function it_implements_context_aware_normalizer_interface(): void
@@ -48,7 +52,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ProductImageInterface $productImage,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -65,7 +69,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         ProductImageInterface $productImage,
         RequestStack $requestStack,
         Request $request,
-        CacheManager $cacheManager
+        CacheManager $cacheManager,
     ): void {
         $this->setNormalizer($normalizer);
 

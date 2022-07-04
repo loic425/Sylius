@@ -25,9 +25,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 final class GetProductBySlugAction
 {
     private ChannelContextInterface $channelContext;
+
     private LocaleContextInterface $localeContext;
+
     private ProductRepositoryInterface $productRepository;
+
     private IriConverterInterface $iriConverter;
+
     private RequestStack $requestStack;
 
     public function __construct(
@@ -35,7 +39,7 @@ final class GetProductBySlugAction
         LocaleContextInterface $localeContext,
         ProductRepositoryInterface $productRepository,
         IriConverterInterface $iriConverter,
-        RequestStack $requestStack
+        RequestStack $requestStack,
     ) {
         $this->channelContext = $channelContext;
         $this->localeContext = $localeContext;

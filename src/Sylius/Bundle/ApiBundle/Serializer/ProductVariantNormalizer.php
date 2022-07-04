@@ -51,7 +51,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         SectionProviderInterface $uriBasedSectionContext,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
@@ -73,16 +73,15 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
             $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
         } catch (ChannelNotFoundException $exception) {
-            unset($data['price']);
-            unset($data['originalPrice']);
+            unset($data['price'], $data['originalPrice']);
         }
 
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) =>
-                $this->iriConverter->getIriFromItem($catalogPromotion),
-                $appliedPromotions->toArray()
+            $data['appliedPromotions'] = array_map(
+                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromItem($catalogPromotion),
+                $appliedPromotions->toArray(),
             );
         }
 

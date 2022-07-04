@@ -25,7 +25,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function let(
         DenormalizerInterface $objectNormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer
+        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $this->beConstructedWith(
             $objectNormalizer,
@@ -34,7 +34,8 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         );
     }
 
-    function it_supports_denormalization_add_product_review(): void {
+    function it_supports_denormalization_add_product_review(): void
+    {
         $context['input']['class'] = AddProductReview::class;
 
         $this
@@ -42,13 +43,14 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
                 new AddProductReview('Cap', 5, 'ok', 'cap_code', 'john@example.com'),
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn(true)
         ;
     }
 
-    function it_does_not_support_denormalization_for_not_supported_class(): void {
+    function it_does_not_support_denormalization_for_not_supported_class(): void
+    {
         $context['input']['class'] = Order::class;
 
         $this
@@ -56,7 +58,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
                 new Order(),
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn(false)
         ;
@@ -65,7 +67,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
         DenormalizerInterface $objectNormalizer,
         iriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer
+        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $context['input']['class'] = AddProductReview::class;
 
@@ -89,7 +91,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
             ],
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->willReturn($addProductReview)
         ;
@@ -114,7 +116,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
             ],
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn($addProductReview)
         ;
